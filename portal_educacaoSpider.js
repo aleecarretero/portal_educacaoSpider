@@ -7,20 +7,22 @@ request('https://www.portaleducacao.com.br/cursos?utm_campaign=cursos&utm_medium
 
     var $ = cheerio.load(body);
 
-    console.log('hello');
-
-
     $('.box.listaProdutos div.prateleira').each(function(){
 
         var title = $(this).find('h2').text().trim().toUpperCase();
 
         console.log(title);
 
-        var list = cheerio.load($(this));
+        var list = cheerio.load(list(this).html());
 
-        list('.slick-slider li.slick-slide').each(function(){
+        list('ul li.cursos-online-de-informatica-e-tecnologia---portal-educacao').each(function(){
 
-            console.log('list(this)'+list(this)+'\n--------------------------------------------------------------------------');
+            var categoria = list(this).html().find('div.categoriaProduto').text().trim();
+            var nome = list(this).html().find('div.nomeProduto').text().trim();
+            var cargaHoraria = list(this).html().find('div.cargaHoraria').text().trim();
+            var precoDe = list(this).html().find('div.precoDe').text().trim();
+            var precoAtual = list(this).html().find('div.precoPor').text().trim();
+
         });
     });
 });
